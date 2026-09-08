@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Nathaniel Corey - ECE and Computer Science at Duke. Embedded systems and firmware: hardware development kits, motor-control test frameworks, and 5G/XR research.">
+<meta name="author" content="Nathaniel Corey">
+<link rel="canonical" href="https://nathanielcorey.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nathaniel Corey">
+<meta property="og:title" content="Nathaniel Corey">
+<meta property="og:description" content="Nathaniel Corey - ECE and Computer Science at Duke. Embedded systems and firmware: hardware development kits, motor-control test frameworks, and 5G/XR research.">
+<meta property="og:url" content="https://nathanielcorey.com/">
+<meta property="og:image" content="https://nathanielcorey.com/images/portrait.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%278%27 fill=%27%231E3A5F%27/%3E%3Ctext x=%2732%27 y=%2744%27 font-family=%27Georgia,serif%27 font-size=%2732%27 font-weight=%27600%27 fill=%27%23ffffff%27 text-anchor=%27middle%27%3ENC%3C/text%3E%3C/svg%3E">
+<style>
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
+<title>Nathaniel Corey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap">
+
+<style>
+  :root {
+    --white:   #FFFFFF;
+    --ink:     #17181A;
+    --ink-2:   #4A4E54;
+    --ink-3:   #858C93;
+    --rule:    #E4E6E9;
+    --rule-2:  #EFF1F3;
+    --tint:    #F7F8F9;
+    --accent:  #1E3A5F;
+
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans:  "Source Sans 3", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+
+    --col: 940px;
+    --gut: clamp(22px, 5vw, 48px);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .wrap {
+    max-width: var(--col);
+    margin: 0 auto;
+    padding: 0 var(--gut);
+  }
+
+  /* ---------- top bar ---------- */
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--white);
+    border-bottom: 1px solid var(--rule);
+  }
+  .topbar .wrap {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-top: 13px;
+    padding-bottom: 13px;
+  }
+  .topbar .who {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  .topbar nav {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .topbar nav a {
+    font-size: 0.85rem;
+    color: var(--ink-2);
+    text-decoration: none;
+    padding-bottom: 1px;
+    border-bottom: 1px solid transparent;
+    transition: color .15s, border-color .15s;
+  }
+  .topbar nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ---------- intro ---------- */
+
+  header.intro {
+    padding: clamp(52px, 8vw, 88px) 0 12px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 232px;
+    gap: 0 52px;
+  }
+  header.intro .lead { grid-column: 1; }
+  header.intro .portrait {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    margin-top: 8px;
+  }
+  header.intro .portrait img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(2.1rem, 5vw, 2.9rem);
+    letter-spacing: -0.012em;
+    line-height: 1.1;
+    margin: 0 0 26px;
+  }
+
+  .note {
+    max-width: 66ch;
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+  }
+  .note p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 1.0625rem;
+    line-height: 1.68;
+  }
+  .note p a { color: var(--accent); text-decoration: none; border-bottom: 1px solid #C3CEDA; }
+  .note p a:hover { border-bottom-color: var(--accent); }
+  .sig {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink);
+    font-size: 1.0625rem;
+  }
+
+  .actions {
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .actions a {
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    text-decoration: none;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 8px 16px;
+    background: var(--white);
+    transition: border-color .15s, color .15s, background .15s;
+  }
+  .actions a:hover { border-color: var(--accent); color: var(--accent); background: var(--tint); }
+
+  /* ---------- sections ---------- */
+
+  section { padding: 56px 0 4px; }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.004em;
+    margin: 0 0 4px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  /* ---------- entries ---------- */
+
+  .entry {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 288px;
+    gap: 10px 40px;
+    align-items: start;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--rule-2);
+  }
+  .entry.solo { grid-template-columns: minmax(0, 1fr); }
+  .entry:last-child { border-bottom: none; }
+
+  .org-row {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    flex-wrap: wrap;
+  }
+  .org-row h3 {
+    font-family: var(--serif);
+    font-size: 1.18rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.004em;
+  }
+  img.mark { display: block; width: auto; }
+  img.mark.beta { height: 38px; }
+  img.mark.i3t  { height: 34px; }
+  img.mark.sbd  { height: 22px; }
+
+  .role {
+    margin: 5px 0 0;
+    font-size: 0.97rem;
+    color: var(--ink-2);
+  }
+  .when {
+    margin: 3px 0 0;
+    font-size: 0.82rem;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  ul {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 70ch;
+  }
+  li {
+    position: relative;
+    padding-left: 19px;
+    font-size: 0.97rem;
+    line-height: 1.58;
+    color: var(--ink-2);
+  }
+  li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.66em;
+    width: 8px;
+    height: 1px;
+    background: #C6CBD1;
+  }
+  li b { font-weight: 600; color: var(--ink); }
+
+  .blurb {
+    margin: 15px 0 0;
+    font-size: 0.97rem;
+    line-height: 1.6;
+    color: var(--ink-2);
+    max-width: 70ch;
+  }
+  .blurb a { color: var(--accent); text-decoration: none; border-bottom: 1px solid #C3CEDA; }
+  .blurb a:hover { border-bottom-color: var(--accent); }
+
+  .stack {
+    margin: 15px 0 0;
+    font-size: 0.83rem;
+    letter-spacing: 0.03em;
+    color: var(--ink-3);
+  }
+
+  /* ---------- media ---------- */
+
+  figure { margin: 0; }
+  .media { display: flex; flex-direction: column; gap: 7px; }
+  .media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+  }
+  .media figcaption {
+    font-size: 0.76rem;
+    line-height: 1.45;
+    color: var(--ink-3);
+  }
+  .media img.zoom { cursor: zoom-in; transition: border-color .15s; }
+  .media img.zoom:hover { border-color: #B9C2CC; }
+  .media.wide {
+    grid-column: 1 / -1;
+    margin-top: 10px;
+    background: var(--tint);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 22px;
+    align-items: center;
+  }
+  .media.wide img {
+    width: auto;
+    max-width: 100%;
+    max-height: 330px;
+    border: none;
+    border-radius: 0;
+  }
+
+  /* ---------- details table ---------- */
+
+  .rows { margin-top: 6px; }
+  .row {
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 6px 34px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--rule-2);
+  }
+  .row:last-child { border-bottom: none; }
+  .row dt, .row .k {
+    font-size: 0.82rem;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    padding-top: 2px;
+  }
+  .row .v { font-size: 0.96rem; color: var(--ink-2); line-height: 1.6; }
+  .row .v b { font-weight: 600; color: var(--ink); }
+
+  /* ---------- footer ---------- */
+
+  footer {
+    margin-top: 64px;
+    border-top: 1px solid var(--rule);
+    padding: 40px 0 72px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 48px;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  footer .lede {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--ink);
+    margin: 0;
+    max-width: 34ch;
+  }
+  footer .links { display: flex; flex-direction: column; gap: 7px; }
+  footer .links a {
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    width: fit-content;
+  }
+  footer .links a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ---------- lightbox ---------- */
+
+  #lb {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: rgba(20, 22, 25, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 26px;
+    cursor: zoom-out;
+  }
+  #lb img { max-width: 100%; max-height: 100%; object-fit: contain; background: #fff; }
+  #lb .hint {
+    position: absolute;
+    bottom: 16px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    color: #B9BFC5;
+  }
+
+  @media (max-width: 820px) {
+    header.intro { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    header.intro .portrait { grid-column: 1; grid-row: 2; margin: 30px 0 0; max-width: 210px; }
+    .entry { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+    .media { margin-top: 18px; max-width: 460px; }
+    .media.wide { max-width: none; }
+    .row { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+    .topbar nav { gap: 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap">
+    <span class="who">Nathaniel Corey</span>
+    <nav>
+      <a href="#experience">Experience</a>
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#apps">Apps</a>
+      <a href="#details">Skills</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="intro">
+    <figure class="portrait">
+      <img src="images/portrait.jpg" alt="Nathaniel Corey standing on a rock ledge above a forested valley in the Adirondacks.">
+    </figure>
+
+    <div class="lead">
+    <h1>Nathaniel Corey</h1>
+
+    <div class="note">
+      <p>
+        I love combining software with hardware to solve cool problems. I made this website to
+        showcase some of my projects and experience, and plan to keep updating it over time.
+      </p>
+      <p>
+        I am an ECE + CS major at Duke graduating in May 2027. This past summer I interned with the
+        Airborne Software team at BETA Technologies, an electric aerospace company, building a
+        Hardware Development Kit for a TI processor. The summer before, I interned at Stanley
+        Black &amp; Decker, where I worked on building a white-box testing framework to validate
+        BLDC motor-controller firmware. Since January I've also been involved with Duke's
+        Intelligent Interactive IoT Lab, where I've worked with a Linux 5G testbed for XR
+        application networking.
+      </p>
+      <p>
+        I'm graduating in May 2027 and hoping to explore a new opportunity that will strengthen my
+        embedded systems skills. I'd love to join a team working on something cool. Email me at
+        <a href="mailto:nathaniel.corey1@outlook.com">nathaniel.corey1@outlook.com</a>.
+      </p>
+      <p class="sig">- Nate</p>
+    </div>
+
+    <nav class="actions">
+      <a href="mailto:nathaniel.corey1@outlook.com">Email</a>
+      <a href="https://www.linkedin.com/in/nathaniel-c-00b128255/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/nathCode45" target="_blank" rel="noopener">GitHub</a>
+      <!-- Put resume.pdf next to this file and this link works. -->
+      <a href="resume.pdf">R&#233;sum&#233;</a>
+    </nav>
+    </div>
+  </header>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section id="experience">
+    <h2>Experience</h2>
+
+    <div class="entry">
+      <div>
+        <div class="org-row">
+          <img class="mark beta" src="images/beta-logo.png" alt="BETA Technologies">
+          <h3>BETA Technologies</h3>
+        </div>
+        <p class="role">Airborne Software Engineering Intern</p>
+        <p class="when">May &#8211; Aug 2026 &nbsp;&#183;&nbsp; South Burlington, VT</p>
+        <ul>
+          <li>Designed and built a <b>Hardware Development Kit (HDK)</b> for verification and validation of airborne software on the TI AM263 MCU, used directly by a team of 5+ engineers.</li>
+          <li>Developed and validated drivers for I2C, UART, and SPI communication; debugged an I2C ACK/NACK fault using a logic analyzer and JTAG.</li>
+          <li>Built drivers via the MCU+ SDK to interface with FRAM and flash memory ICs; used a flash programming tool to configure compiled binaries and bootloader images.</li>
+          <li>Wrote a Python API for an Analog Discovery 3 logic analyzer / waveform generator to capture I2C/UART/SPI protocol data and generate analog waveforms for test.</li>
+          <li>Designed a relay circuit for MCU and peripheral power control and built a GUI + API for remote HDK power control; used MATLAB/Simulink to design an RC low-pass filter for PWM-based analog waveform generation.</li>
+          <li>Wrote J-Link test scripts to set breakpoints at program symbols and resume execution, supporting early bring-up of the HDK's V&amp;V environment.</li>
+        </ul>
+      </div>
+      <figure class="media">
+        <img class="zoom" src="images/beta-flight.jpg" alt="Nathaniel and a pilot in headsets in the cockpit of a small aircraft.">
+        <figcaption>My first flight lesson w/ BETA, summer 2026</figcaption>
+      </figure>
+    </div>
+
+    <div class="entry">
+      <div>
+        <div class="org-row">
+          <img class="mark sbd" src="images/sbd-logo.png" alt="Stanley Black &amp; Decker">
+          <h3>Stanley Black &amp; Decker</h3>
+        </div>
+        <p class="role">Embedded Software Engineering Intern</p>
+        <p class="when">Jun &#8211; Aug 2025 &nbsp;&#183;&nbsp; Towson, MD</p>
+        <ul>
+          <li>Built a Python-based <b>white-box testing framework</b> (pytest, pandas) to validate STM32 motor controller firmware against safety and performance requirements.</li>
+          <li>Developed a Python/pandas module to derive motor speed, rotation direction, and fault conditions &#8212; invalid hall states, dropped and out-of-sequence transitions &#8212; from three-channel hall-effect sensor CSVs.</li>
+          <li>Profiled firmware performance using an Ozone debugger, oscilloscopes, and logic analyzer to identify and resolve system bottlenecks.</li>
+          <li>Led a cross-functional intern team applying data-driven analysis to improve manufacturing workforce retention strategies.</li>
+        </ul>
+      </div>
+      <figure class="media">
+        <img class="zoom" src="images/sbd-interns.jpg" alt="The Stanley Black &amp; Decker summer intern cohort at the DeWalt facility in Towson, Maryland.">
+        <figcaption>Intern cohort, Towson</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= RESEARCH ================= -->
+  <section id="research">
+    <h2>Research</h2>
+
+    <div class="entry">
+      <div>
+        <div class="org-row">
+          <img class="mark i3t" src="images/i3t-logo.png" alt="Intelligent Interactive Internet of Things Lab">
+        </div>
+        <div class="org-row" style="margin-top:11px">
+          <h3>Telemetry-Aware 5G Scheduling</h3>
+        </div>
+        <p class="role">Independent Study &#8212; Interactive &amp; Intelligent IoT Lab, Duke</p>
+        <p class="when">Fall 2026 &#8211; Present</p>
+        <ul>
+          <li>Characterized latency and synchronization behavior in a 5G-supported multi-user XR rehab system for Parkinson's patients, finding that application-logic offloading increased network throughput by <b>24%</b>.</li>
+          <li>Developing a context-aware 5G RAN scheduler in C++ to prioritize latency-critical XR traffic, with a native telemetry agent embedded in an XR application process and a telemetry collector on the RAN.</li>
+        </ul>
+      </div>
+      <figure class="media">
+        <img class="zoom" src="images/i3t-poster.jpg" alt="Research poster: Characterizing Network Performance for Multi-User XR Rehab Systems.">
+        <figcaption>Research poster &#8212; click to enlarge</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= PROJECTS ================= -->
+  <section id="projects">
+    <h2>Projects</h2>
+
+    <div class="entry">
+      <div>
+        <div class="org-row"><h3>Quadrotor Trajectory Control</h3></div>
+        <p class="when">Sep &#8211; Dec 2025</p>
+        <ul>
+          <li>Designed and simulated a 6-DOF quadrotor controller using a <b>nested PID architecture</b> with feedforward acceleration, achieving over 50% reduction in settling time and eliminating overshoot versus baseline PID.</li>
+          <li>Validated robustness under a 20% mass mismatch, demonstrating integral action for disturbance rejection and steady-state error reduction.</li>
+        </ul>
+        <p class="stack">MATLAB &#183; Simulink &#183; Control design</p>
+      </div>
+      <figure class="media">
+        <img class="zoom" src="images/quadrotor-simulink.jpg" alt="The Simulink model: a 6-DOF Euler-angle plant block with nested position and attitude PID loops and feedforward acceleration.">
+        <figcaption>The Simulink model &#8212; click to enlarge</figcaption>
+      </figure>
+    </div>
+
+    <div class="entry">
+      <div>
+        <div class="org-row"><h3>FPGA-Based Smart Solar Tracker</h3></div>
+        <p class="when">May 2026</p>
+        <ul>
+          <li>Integrated photoresistor analog-to-digital conversion readings and servo motor control through an <b>FPGA-based processor</b> solution written in Verilog and MIPS assembly.</li>
+        </ul>
+        <p class="stack">Verilog &#183; MIPS assembly &#183; ADC &#183; Servo control</p>
+      </div>
+      <figure class="media">
+        <img class="zoom" src="images/solar-tracker.jpg" alt="The solar tracker on a lab bench: a panel on a servo-driven 3D-printed mount, wired to a breadboard and an FPGA development board.">
+        <figcaption>The rig on the bench</figcaption>
+      </figure>
+    </div>
+
+    <div class="entry">
+      <div>
+        <div class="org-row"><h3>Leyman Prosthetic Arm</h3></div>
+        <p class="role">Duke eNable</p>
+        <p class="when">Sep 2024 &#8211; Present</p>
+        <ul>
+          <li>Designed an <b>EMG signal acquisition circuit</b> using a differential amplifier and developed Arduino C programs for motor control and signal processing on a client-facing prosthetic arm.</li>
+        </ul>
+        <p class="stack">Embedded C &#183; Analog front-end &#183; Motor control</p>
+      </div>
+      <figure class="media">
+        <img class="zoom" src="images/prosthetic-arm.jpg" alt="The prosthetic arm prototype: an Arduino and driver electronics in a 3D-printed orange housing above a geared motor, wired to the forearm assembly.">
+        <figcaption>Prototype electronics and drive</figcaption>
+      </figure>
+    </div>
+
+    <div class="entry">
+      <div>
+        <div class="org-row"><h3>16-bit MIPS Processor</h3></div>
+        <p class="when">Spring 2025</p>
+        <ul>
+          <li>Built a CPU from first principles &#8212; 1-bit adders, flip-flops, multiplexers, and tri-state buffers assembled into an ALU, a register file with read and write ports, and instruction and data memory.</li>
+          <li>The datapath fetches, decodes, and executes custom 16-bit MIPS instructions, with keyboard input wired in for interactive programs.</li>
+        </ul>
+        <p class="stack">Digital logic &#183; Computer architecture &#183; Logisim</p>
+      </div>
+      <figure class="media">
+        <img class="zoom" src="images/mips-logisim.jpg" alt="The complete processor in Logisim: program counter, instruction ROM, register file, ALU, RAM, and the control-gate decoder below.">
+        <figcaption>The full datapath &#8212; click to enlarge</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= APPS ================= -->
+  <section id="apps">
+    <h2>Published Apps</h2>
+
+    <div class="entry">
+      <div>
+        <div class="org-row"><h3>CardFlow &#8212; Smart Flashcards</h3></div>
+        <p class="when">iOS &nbsp;&#183;&nbsp; 3,900+ downloads</p>
+        <p class="blurb">
+          Independently built and published to the App Store. Image capture and masking tools turn
+          handwritten notes into cards, and an adaptive scheduling algorithm tunes review intervals
+          from user feedback.
+          <br>
+          <a href="https://apps.apple.com/us/app/cardflow-smart-flashcards/id6448393361" target="_blank" rel="noopener">App&nbsp;Store</a>
+          &nbsp;&#183;&nbsp;
+          <a href="https://github.com/nathCode45/cardFlow" target="_blank" rel="noopener">GitHub</a>
+        </p>
+        <p class="stack">Dart &#183; Flutter &#183; SQLite</p>
+      </div>
+      <figure class="media wide">
+        <img class="zoom" src="images/cardflow-screens.png" alt="Three CardFlow screens: the rich-text card editor, the deck list with a weekly review chart, and the spaced-repetition review view.">
+      </figure>
+    </div>
+
+    <div class="entry">
+      <div>
+        <div class="org-row"><h3>Piction &#8212; Group Pictionary</h3></div>
+        <p class="when">Android &nbsp;&#183;&nbsp; 40,000+ downloads</p>
+        <p class="blurb">
+          Built and published solo to the Google Play Store while in high school. Turns a room full
+          of phones into a shared Pictionary game.
+          <br>
+          <a href="https://play.google.com/store/apps/details?id=app.ncore.piction&amp;hl=en_US&amp;gl=US" target="_blank" rel="noopener">Play&nbsp;Store</a>
+          &nbsp;&#183;&nbsp;
+          <a href="https://github.com/nathCode45/piction" target="_blank" rel="noopener">GitHub</a>
+        </p>
+        <p class="stack">Java &#183; Android SDK</p>
+      </div>
+      <figure class="media wide">
+        <img class="zoom" src="images/piction-screens.png" alt="Three Piction screens: game setup with word categories and difficulty, a live round showing the word to draw, and the automatic scoreboard.">
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= DETAILS ================= -->
+  <section id="details">
+    <h2>Skills &amp; Education</h2>
+
+    <div class="rows">
+      <div class="row">
+        <span class="k">Embedded &amp; systems</span>
+        <span class="v">STM32 and TI microcontrollers &#183; I2C / UART / SPI &#183; motor control algorithms &#183; sensor integration &#183; real-time systems &#183; hardware-in-the-loop (HIL) testing</span>
+      </div>
+      <div class="row">
+        <span class="k">Programming</span>
+        <span class="v">C / C++ &#183; Python &#183; Java &#183; MATLAB/Simulink &#183; Git &#183; automated testing (pytest) &#183; mobile app development with Android SDK &#183; Claude Code</span>
+      </div>
+      <div class="row">
+        <span class="k">Tools &amp; test equipment</span>
+        <span class="v">Oscilloscope &#183; logic analyzer &#183; JTAG / J-Link &#183; Ozone debugger &#183; Code Composer Studio &#183; SPICE &#183; Wireshark &#183; AutoCAD / Inventor</span>
+      </div>
+      <div class="row">
+        <span class="k">Education</span>
+        <span class="v"><b>Duke University</b> &#8212; BSE Electrical &amp; Computer Engineering, BS Computer Science. Graduating May 2027. GPA 3.63.</span>
+      </div>
+      <div class="row">
+        <span class="k">Coursework</span>
+        <span class="v">Intro to Embedded Systems &#183; Computer Architecture &#183; Digital Systems &#183; Signals and Systems &#183; Microelectronic Devices and Circuits &#183; Control Engineering &#183; Operating Systems &#183; Engineering Design and Communication &#183; Intro to Artificial Intelligence</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="lede">Looking for full-time embedded systems work starting in 2027.</p>
+    <div class="links">
+      <a href="mailto:nathaniel.corey1@outlook.com">nathaniel.corey1@outlook.com</a>
+      <a href="https://www.linkedin.com/in/nathaniel-c-00b128255/" target="_blank" rel="noopener">linkedin.com/in/nathaniel-c</a>
+      <a href="https://github.com/nathCode45" target="_blank" rel="noopener">github.com/nathCode45</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Click any figure image to open it full size.
+  (function () {
+    var box = null;
+    function close() {
+      if (box) { box.remove(); box = null; document.body.style.overflow = ""; }
+    }
+    document.addEventListener("click", function (e) {
+      var img = e.target.closest ? e.target.closest("img.zoom") : null;
+      if (!img) return;
+      close();
+      box = document.createElement("div");
+      box.id = "lb";
+      var big = document.createElement("img");
+      big.src = img.src;
+      big.alt = img.alt;
+      var hint = document.createElement("p");
+      hint.className = "hint";
+      hint.textContent = "Click anywhere or press Esc to close";
+      box.appendChild(big);
+      box.appendChild(hint);
+      box.addEventListener("click", close);
+      document.body.appendChild(box);
+      document.body.style.overflow = "hidden";
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") close();
+    });
+  })();
+</script>
+</body>
+</html>
