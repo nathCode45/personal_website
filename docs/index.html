@@ -221,6 +221,18 @@
   img.mark.i3t  { height: 34px; }
   img.mark.sbd  { height: 22px; }
 
+  .tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid #C3CEDA;
+    background: #F4F7FA;
+    border-radius: 2px;
+    padding: 2px 8px;
+    white-space: nowrap;
+  }
+
   .role {
     margin: 5px 0 0;
     font-size: 0.97rem;
@@ -536,6 +548,28 @@
   <!-- ================= PROJECTS ================= -->
   <section id="projects">
     <h2>Projects</h2>
+
+    <div class="entry">
+      <div>
+        <div class="org-row">
+          <h3>Rotational Phase Estimator</h3>
+          <span class="tag">In progress</span>
+        </div>
+        <p class="role">Independent Study, Duke ECE</p>
+        <p class="when">Fall 2026 &#8211; Present</p>
+        <ul>
+          <li>Building an embedded system that estimates the <b>phase angle and rotational frequency</b> of a body spinning at roughly 1,800 RPM in real time, accurate enough to drive persistence-of-vision LED output from the rotating frame. The application is relevant to combat robotics, where MeltyBrain drivetrains require precise angular sensing.</li>
+          <li>Running on an <b>ESP32-C6</b>. Plan is for beacon-pulse timestamping to route a GPIO edge to timer capture, so edges are latched without CPU involvement, and the phase math will run in software. Timing constraints are important for this project, especially if I later decide to target higher angular resolution updates or to support higher RPM.</li>
+          <li>Hardware configuration is well along: the spindle fixture, power path, and compute are fabricated and assembled, and bring-up is underway.</li>
+          <li>Delivering a functional prototype with supporting analysis at the end of the semester.</li>
+        </ul>
+        <p class="stack">ESP32-C6 &#183; Embedded C &#183; Hardware timer capture &#183; Real-time timing analysis</p>
+      </div>
+      <figure class="media">
+        <img class="zoom" src="images/rotational-estimator.jpg" alt="The first fabricated spindle fixture: an elliptical 3D-printed body with recessed bays holding a lithium battery, a power circuit, a sensor board, and an ESP32-C6 on protoboard, with balance weights at each end.">
+        <figcaption>First fabricated spindle fixture &#8212; battery, power circuit, and the ESP32-C6 on protoboard</figcaption>
+      </figure>
+    </div>
 
     <div class="entry">
       <div>
