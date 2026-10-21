@@ -271,7 +271,6 @@
     height: 1px;
     background: #C6CBD1;
   }
-  li b { font-weight: 600; color: var(--ink); }
 
   .blurb {
     margin: 15px 0 0;
@@ -344,7 +343,6 @@
     padding-top: 2px;
   }
   .row .v { font-size: 0.96rem; color: var(--ink-2); line-height: 1.6; }
-  .row .v b { font-weight: 600; color: var(--ink); }
 
   /* ---------- footer ---------- */
 
@@ -483,7 +481,7 @@
         <p class="role">Airborne Software Engineering Intern</p>
         <p class="when">May &#8211; Aug 2026 &nbsp;&#183;&nbsp; South Burlington, VT</p>
         <ul>
-          <li>Designed and built a <b>Hardware Development Kit (HDK)</b> for verification and validation of airborne software on the TI AM263 MCU, used directly by a team of 5+ engineers.</li>
+          <li>Designed and built a Hardware Development Kit (HDK) for verification and validation of airborne software on the TI AM263 MCU, used directly by a team of 5+ engineers.</li>
           <li>Developed and validated drivers for I2C, UART, and SPI communication; debugged an I2C ACK/NACK fault using a logic analyzer and JTAG.</li>
           <li>Built drivers via the MCU+ SDK to interface with FRAM and flash memory ICs; used a flash programming tool to configure compiled binaries and bootloader images.</li>
           <li>Wrote a Python API for an Analog Discovery 3 logic analyzer / waveform generator to capture I2C/UART/SPI protocol data and generate analog waveforms for test.</li>
@@ -506,7 +504,7 @@
         <p class="role">Embedded Software Engineering Intern</p>
         <p class="when">Jun &#8211; Aug 2025 &nbsp;&#183;&nbsp; Towson, MD</p>
         <ul>
-          <li>Built a Python-based <b>white-box testing framework</b> (pytest, pandas) to validate STM32 motor controller firmware against safety and performance requirements.</li>
+          <li>Built a Python-based white-box testing framework (pytest, pandas) to validate STM32 motor controller firmware against safety and performance requirements.</li>
           <li>Developed a Python/pandas module to derive motor speed, rotation direction, and fault conditions &#8212; invalid hall states, dropped and out-of-sequence transitions &#8212; from three-channel hall-effect sensor CSVs.</li>
           <li>Profiled firmware performance using an Ozone debugger, oscilloscopes, and logic analyzer to identify and resolve system bottlenecks.</li>
           <li>Led a cross-functional intern team applying data-driven analysis to improve manufacturing workforce retention strategies.</li>
@@ -534,7 +532,7 @@
         <p class="role">Independent Study &#8212; Interactive &amp; Intelligent IoT Lab, Duke</p>
         <p class="when">Fall 2026 &#8211; Present</p>
         <ul>
-          <li>Characterized latency and synchronization behavior in a 5G-supported multi-user XR rehab system for Parkinson's patients, finding that application-logic offloading increased network throughput by <b>24%</b>.</li>
+          <li>Characterized latency and synchronization behavior in a 5G-supported multi-user XR rehab system for Parkinson's patients, finding that application-logic offloading increased network throughput by 24%.</li>
           <li>Developing a context-aware 5G RAN scheduler in C++ to prioritize latency-critical XR traffic, with a native telemetry agent embedded in an XR application process and a telemetry collector on the RAN.</li>
         </ul>
       </div>
@@ -558,8 +556,8 @@
         <p class="role">Independent Study, Duke ECE</p>
         <p class="when">Fall 2026 &#8211; Present</p>
         <ul>
-          <li>Building an embedded system that estimates the <b>phase angle and rotational frequency</b> of a body spinning at roughly 1,800 RPM in real time, accurate enough to drive persistence-of-vision LED output from the rotating frame. The application is relevant to combat robotics, where MeltyBrain drivetrains require precise angular sensing.</li>
-          <li>Running on an <b>ESP32-C6</b>. Plan is for beacon-pulse timestamping to route a GPIO edge to timer capture, so edges are latched without CPU involvement, and the phase math will run in software. Timing constraints are important for this project, especially if I later decide to target higher angular resolution updates or to support higher RPM.</li>
+          <li>Building an embedded system that estimates the phase angle and rotational frequency of a body spinning at roughly 1,800 RPM in real time, accurate enough to drive persistence-of-vision LED output from the rotating frame. The application is relevant to combat robotics, where MeltyBrain drivetrains require precise angular sensing.</li>
+          <li>Running on an ESP32-C6. Plan is for beacon-pulse timestamping to route a GPIO edge to timer capture, so edges are latched without CPU involvement, and the phase math will run in software. Timing constraints are important for this project, especially if I later decide to target higher angular resolution updates or to support higher RPM.</li>
           <li>Hardware configuration is well along: the spindle fixture, power path, and compute are fabricated and assembled, and bring-up is underway.</li>
           <li>Delivering a functional prototype with supporting analysis at the end of the semester.</li>
         </ul>
@@ -576,7 +574,7 @@
         <div class="org-row"><h3>Quadrotor Trajectory Control</h3></div>
         <p class="when">Sep &#8211; Dec 2025</p>
         <ul>
-          <li>Designed and simulated a 6-DOF quadrotor controller using a <b>nested PID architecture</b> with feedforward acceleration, achieving over 50% reduction in settling time and eliminating overshoot versus baseline PID.</li>
+          <li>Designed and simulated a 6-DOF quadrotor controller using a nested PID architecture with feedforward acceleration, achieving over 50% reduction in settling time and eliminating overshoot versus baseline PID.</li>
           <li>Validated robustness under a 20% mass mismatch, demonstrating integral action for disturbance rejection and steady-state error reduction.</li>
         </ul>
         <p class="stack">MATLAB &#183; Simulink &#183; Control design</p>
@@ -592,7 +590,7 @@
         <div class="org-row"><h3>FPGA-Based Smart Solar Tracker</h3></div>
         <p class="when">May 2026</p>
         <ul>
-          <li>Integrated photoresistor analog-to-digital conversion readings and servo motor control through an <b>FPGA-based processor</b> solution written in Verilog and MIPS assembly.</li>
+          <li>Integrated photoresistor analog-to-digital conversion readings and servo motor control through an FPGA-based processor solution written in Verilog and MIPS assembly.</li>
         </ul>
         <p class="stack">Verilog &#183; MIPS assembly &#183; ADC &#183; Servo control</p>
       </div>
@@ -608,7 +606,7 @@
         <p class="role">Duke eNable</p>
         <p class="when">Sep 2024 &#8211; Present</p>
         <ul>
-          <li>Designed an <b>EMG signal acquisition circuit</b> using a differential amplifier and developed Arduino C programs for motor control and signal processing on a client-facing prosthetic arm.</li>
+          <li>Designed an EMG signal acquisition circuit using a differential amplifier and developed Arduino C programs for motor control and signal processing on a client-facing prosthetic arm.</li>
         </ul>
         <p class="stack">Embedded C &#183; Analog front-end &#183; Motor control</p>
       </div>
@@ -698,7 +696,7 @@
       </div>
       <div class="row">
         <span class="k">Education</span>
-        <span class="v"><b>Duke University</b> &#8212; BSE Electrical &amp; Computer Engineering, BS Computer Science. Graduating May 2027. GPA 3.63.</span>
+        <span class="v">Duke University &#8212; BSE Electrical &amp; Computer Engineering, BS Computer Science. Graduating May 2027. GPA 3.63.</span>
       </div>
       <div class="row">
         <span class="k">Coursework</span>
