@@ -447,8 +447,8 @@
         Hardware Development Kit for a TI processor. The summer before, I interned at Stanley
         Black &amp; Decker, where I worked on building a white-box testing framework to validate
         BLDC motor-controller firmware. Since January I've also been involved with Duke's
-        Intelligent Interactive IoT Lab, where I've worked with a Linux 5G testbed for XR
-        application networking.
+        Intelligent Interactive IoT (I3T) Lab, where I'm modifying a 5G base station's scheduler
+        to prioritize latency-critical XR traffic.
       </p>
       <p>
         I'm graduating in May 2027 and hoping to explore a new opportunity that will strengthen my
@@ -482,7 +482,8 @@
         <p class="when">May &#8211; Aug 2026 &nbsp;&#183;&nbsp; South Burlington, VT</p>
         <ul>
           <li>Designed and built a Hardware Development Kit (HDK) for verification and validation of airborne software on the TI AM263 MCU, used directly by a team of 5+ engineers.</li>
-          <li>Developed and validated drivers for I2C, UART, and SPI communication; debugged an I2C ACK/NACK fault using a logic analyzer and JTAG.</li>
+          <li>Wired 10+ peripherals to the MCU and set up I2C, UART, and SPI communication to support driver validation; debugged an I2C ACK/NACK fault using a logic analyzer and JTAG.</li>
+          <li>Used I2C-controlled digital potentiometers to simulate thermistor values and read the analog output back through an SPI ADC.</li>
           <li>Built drivers via the MCU+ SDK to interface with FRAM and flash memory ICs; used a flash programming tool to configure compiled binaries and bootloader images.</li>
           <li>Wrote a Python API for an Analog Discovery 3 logic analyzer / waveform generator to capture I2C/UART/SPI protocol data and generate analog waveforms for test.</li>
           <li>Designed a relay circuit for MCU and peripheral power control and built a GUI + API for remote HDK power control; used MATLAB/Simulink to design an RC low-pass filter for PWM-based analog waveform generation.</li>
@@ -529,16 +530,20 @@
         <div class="org-row" style="margin-top:11px">
           <h3>Telemetry-Aware 5G Scheduling</h3>
         </div>
-        <p class="role">Independent Study &#8212; Interactive &amp; Intelligent IoT Lab, Duke</p>
-        <p class="when">Fall 2026 &#8211; Present</p>
+        <p class="role">Independent Study &#8212; Intelligent Interactive IoT (I3T) Lab, Duke</p>
+        <p class="when">Jan 2026 &#8211; Present</p>
         <ul>
-          <li>Characterized latency and synchronization behavior in a 5G-supported multi-user XR rehab system for Parkinson's patients, finding that application-logic offloading increased network throughput by 24%.</li>
-          <li>Developing a context-aware 5G RAN scheduler in C++ to prioritize latency-critical XR traffic, with a native telemetry agent embedded in an XR application process and a telemetry collector on the RAN.</li>
+          <li>Built a 5G testbed on OpenAirInterface with two simulated UEs in RFsim, so latency-critical XR traffic competes with iperf3 background load. Wrote bash scripts to automate setup and teardown.</li>
+          <li>Ran a baseline experiment showing the default gNB scheduler splits radio resources evenly between UEs regardless of latency needs, which motivates priority-aware scheduling.</li>
+          <li>Traced OAI's MAC scheduler source to where the proportional-fair weights are set. Currently modifying the downlink scheduler to prioritize XR traffic.</li>
+          <li>Developing a C++ priority-request pipeline (CMake, Linux IPC) in which an XR workload sends telemetry over Unix domain sockets to a daemon that classifies traffic priority for the RAN.</li>
+          <li>Earlier phase (Spring 2026): characterized WordPlay XR traffic between two Meta Quest 3 headsets over Wi-Fi. Found that multiplayer sync was routed through external cloud servers, measured about 75&#8211;81 ms round-trip delay, and saw a 24% throughput increase when game logic moved to a dedicated server.</li>
         </ul>
+        <p class="stack">OpenAirInterface &#183; C / C++ &#183; Linux &#183; iperf3 &#183; Wireshark</p>
       </div>
       <figure class="media">
         <img class="zoom" src="images/i3t-poster.jpg" alt="Research poster: Characterizing Network Performance for Multi-User XR Rehab Systems.">
-        <figcaption>Research poster &#8212; click to enlarge</figcaption>
+        <figcaption>Spring 2026 research poster &#8212; click to enlarge</figcaption>
       </figure>
     </div>
   </section>
@@ -556,12 +561,12 @@
         <p class="role">Independent Study, Duke ECE</p>
         <p class="when">Fall 2026 &#8211; Present</p>
         <ul>
-          <li>Building an embedded system that estimates the phase angle and rotational frequency of a body spinning at roughly 1,800 RPM in real time, accurate enough to drive persistence-of-vision LED output from the rotating frame. The application is relevant to combat robotics, where MeltyBrain drivetrains require precise angular sensing.</li>
+          <li>Building an embedded system that estimates the phase angle and rotational frequency of a rotor driven at 1,500&#8211;2,750 RPM in real time, targeting sub-millisecond timing resolution to hold angular resolution under 10&#176;, accurate enough to drive persistence-of-vision LED output from the rotating frame. The application is relevant to combat robotics, where MeltyBrain drivetrains require precise angular sensing.</li>
           <li>Running on an ESP32-C6. Plan is for beacon-pulse timestamping to route a GPIO edge to timer capture, so edges are latched without CPU involvement, and the phase math will run in software. Timing constraints are important for this project, especially if I later decide to target higher angular resolution updates or to support higher RPM.</li>
-          <li>Hardware configuration is well along: the spindle fixture, power path, and compute are fabricated and assembled, and bring-up is underway.</li>
+          <li>Configured the IR sensor loop and soldered the first protoboard circuit with a buck converter and battery charger. Currently developing wireless data transfer to speed up collection of test data.</li>
           <li>Delivering a functional prototype with supporting analysis at the end of the semester.</li>
         </ul>
-        <p class="stack">ESP32-C6 &#183; Embedded C &#183; Hardware timer capture &#183; Real-time timing analysis</p>
+        <p class="stack">ESP32-C6 &#183; C++ &#183; Hardware timer capture &#183; Real-time timing analysis</p>
       </div>
       <figure class="media">
         <img class="zoom" src="images/rotational-estimator.jpg?v=2" alt="The assembled rotor: an elliptical 3D-printed body with recessed bays holding an ESP32-C6 and IR sensor on a soldered protoboard, a center spindle bolt, a buck converter, a battery charger board, and a 400 mAh LiPo battery, wired together.">
@@ -603,7 +608,7 @@
     <div class="entry">
       <div>
         <div class="org-row"><h3>Leyman Prosthetic Arm</h3></div>
-        <p class="role">Duke eNable</p>
+        <p class="role">Embedded Electronics &amp; Controls Subteam Lead, Duke eNable</p>
         <p class="when">Sep 2024 &#8211; Present</p>
         <ul>
           <li>Designed an EMG signal acquisition circuit using a differential amplifier and developed Arduino C programs for motor control and signal processing on a client-facing prosthetic arm.</li>
